@@ -1,0 +1,32 @@
+{
+	"manifest_version": 2,
+	"name": "AMO Editor Timeify",
+	"version": "0.1",
+	"icons": {
+		"48": "icon48.png"
+	},
+	"description": "Time how much time you spend reviewing addons",
+	"applications": {
+		"gecko": {
+			"id": "amo-editor-timeify@jetpack",
+			"strict_min_version": "45.0"
+		}
+	},
+
+	"background": {
+		"scripts": ["common.js", "background.js"]
+	},
+
+	"permissions": [
+		"tabs",
+		"storage"
+	],
+
+	"browser_action": {
+		"default_icon": {
+			"16": "icon16.png",
+			"32": "icon32.png"
+		},
+		"default_popup": "dashboard.html"
+	}
+}
