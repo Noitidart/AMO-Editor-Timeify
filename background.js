@@ -25,7 +25,7 @@ chrome.runtime.onMessage.addListener(function handleMessage(request, sender, sen
 // start - timing interval
 var gInterval;
 const CHECK_INTERVAL = 10000; // ms
-var tpd = chrome.storage.local.get('tpd', startChecking); // time per day
+var tpd = storageCall('local', 'get', 'tpd').then(startChecking); // time per day
 function startChecking(storage) {
 	// console.log('storage:', storage);
 	if (!storage.tpd) {
@@ -56,9 +56,7 @@ function checkTabs(tabs) {
 			tpd[today] += increment_sec;
 		}
 		// console.log('total time spent:', secondsToTime(tpd[today]));
-		chrome.storage.local.set({
-			tpd
-		});
+		storageCall('local', 'set', { tpd });
 	} else {
 		// console.log('not on any review tabs');
 	}

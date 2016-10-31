@@ -22,14 +22,14 @@ function render(storage) {
 	// txt.push('Week Start: ' + formatDate(new Date(weekstart)));
 	var total_sec_week = 0;
 	for (entry of tpd_sorted) {
-		if (entry.day < weekstart) {
-			continue;
-		} else {
+		// if (entry.day < weekstart) {
+		// 	continue;
+		// } else {
 			total_sec_week += entry.sec;
 
 			let date = new Date(parseInt(entry.day));
 			txt.push(formatDate(date) + ';' + formatTimeSpent(entry.sec));
-		}
+		// }
 	}
 
 	txt.splice(0, 0, 'Week Time Spent: ' + formatTimeSpent(total_sec_week), '');
@@ -42,7 +42,7 @@ function render(storage) {
 }
 
 function refreshStorage() {
-	chrome.storage.local.get('tpd', render);
+	storageCall('local', 'get', 'tpd').then(render);
 }
 
 function formatTimeSpent(secs) {
@@ -85,7 +85,7 @@ function formatDate(date) {
 		6: 'Sat'
 	}
 
-	return wkdaystr[wkday] + ';' + monthstr[month] + ' ' + day + ', ' + yr;
+	return wkdaystr[wkday] + ';' + monthstr[month+1] + ' ' + day + ', ' + yr;
 }
 
 
